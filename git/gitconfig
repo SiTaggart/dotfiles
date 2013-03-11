@@ -81,4 +81,4 @@
 [merge]
     tool = Kaleidoscope
 [push]
-    default = simple
+    default = current
