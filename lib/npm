@@ -10,7 +10,7 @@ run_npm() {
         local packages="gify jshint yo"
 
         # Install packages globally and quietly
-        npm install $packages --global --quiet
+        sudo npm install $packages --global --quiet
 
         [[ $? ]] && e_success "Done"
     else
