@@ -30,5 +30,5 @@ export PHANTOMJS_BIN="$(brew --prefix)/bin/phantomjs"
 # shells instead of the default "last window closed" history
 export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-# ebenv
+# rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
