@@ -30,6 +30,7 @@ run_brew() {
             'node'
             'optipng'
             'phantomjs'
+            'rbenv'
             'tree'
             'wget'
         )
