@@ -1,8 +1,8 @@
 #!/bin/bash
 
 DOTFILES_DIRECTORY="${HOME}/.dotfiles"
-DOTFILES_TARBALL_PATH="https://github.com/sitaggart/dotfiles/tarball/master"
-DOTFILES_GIT_REMOTE="https://github.com/sitaggart/dotfiles"
+DOTFILES_TARBALL_PATH="https://github.com/SiTaggart/dotfiles/tarball/master"
+DOTFILES_GIT_REMOTE="https://github.com/SiTaggart/dotfiles"
 
 # If missing, download and extract the dotfiles repository
 if [[ ! -d ${DOTFILES_DIRECTORY} ]]; then
