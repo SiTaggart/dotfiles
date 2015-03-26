@@ -32,6 +32,7 @@ run_brew() {
             'phantomjs'
             'rbenv'
             'ruby-build'
+            'nvm'
             'tree'
             'wget'
         )
