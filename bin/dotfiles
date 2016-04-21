@@ -131,6 +131,7 @@ mirrorfiles() {
     link "vim"                ".vim"
     link "vim/gvimrc"         ".gvimrc"
     link "vim/vimrc"          ".vimrc"
+    link "zsh/zshrc"          ".zshrc"
 
     e_success "Dotfiles update complete!"
 }

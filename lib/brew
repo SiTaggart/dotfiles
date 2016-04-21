@@ -35,6 +35,8 @@ run_brew() {
             'nvm'
             'tree'
             'wget'
+            'zsh'
+            'zsh-completions'
         )
 
         for index in ${!desired_formulae[*]}

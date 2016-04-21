@@ -155,6 +155,19 @@ Screenshot:
 
 ![](http://i.imgur.com/DSJ1G.png)
 
+
+### ZSH and oh-my-zsh custom prompts
+
+This can be run with ZSH shell, running an external theme called PowerLevel9k. Ensure you install oh-my-zsh and the theme
+to take advantage of the `.zshrc` settings.
+
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+```
+```bash
+git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+```
+
 ### Local/private Bash and Vim configuration
 
 Any special-case Vim directives local to a machine should be stored in a
