@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/staggart/.oh-my-zsh
+export ZSH=/Users/${whoami}/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -53,7 +53,7 @@ plugins=(git sublime osx git-flow git-extras npm bower node brew nvm heroku them
 
 # User configuration
 
-export PATH="/Users/staggart/.rbenv/shims:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/bin:/Users/staggart/.dotfiles/bin:/usr/local/opt/coreutils/libexec/gnubin"
+export PATH="/Users/${whoami}/.rbenv/shims:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/bin:/Users/${whoami}/.dotfiles/bin:/usr/local/opt/coreutils/libexec/gnubin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh

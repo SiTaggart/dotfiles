@@ -9,3 +9,8 @@
 # PATH=$PATH:/usr/local/rvm/bin # Add RVM to PATH for scripting
 
 # PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+
+# tabtab source for yo package
+# uninstall by removing these lines or running `tabtab uninstall yo`
+[ -f /usr/local/lib/node_modules/yo/node_modules/tabtab/.completions/yo.bash ] && . /usr/local/lib/node_modules/yo/node_modules/tabtab/.completions/yo.bash
