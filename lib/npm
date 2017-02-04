@@ -10,7 +10,7 @@ run_npm() {
         local packages="gify bower grunt-cli gulp jshint karma eslint eslint-plugin-react babel babel-eslint typings"
 
         # Install packages globally and quietly
-        sudo npm install $packages --global --quiet
+        npm install $packages --global --quiet
 
         [[ $? ]] && e_success "Done"
     else
