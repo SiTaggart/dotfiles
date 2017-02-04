@@ -30,7 +30,6 @@ run_brew() {
             'node'
             'optipng'
             'phantomjs'
-            'ruby-build'
             'nvm'
             'tree'
             'wget'
