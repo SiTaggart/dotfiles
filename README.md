@@ -7,7 +7,7 @@ My OS X dotfiles.
 
 The installation step requires the [XCode Command Line
 Tools](https://developer.apple.com/downloads) and may overwrite existing
-dotfiles in your HOME and `.vim` directories.
+dotfiles in your HOME.
 
 ```bash
 $ bash -c "$(curl -fsSL raw.github.com/SiTaggart/dotfiles/master/bin/dotfiles)"
@@ -68,7 +68,6 @@ Homebrew formulae:
 * [ffmpeg](http://ffmpeg.org/)
 * [graphicsmagick](http://www.graphicsmagick.org/)
 * [jpeg](https://en.wikipedia.org/wiki/Libjpeg)
-* [macvim](http://code.google.com/p/macvim/)
 * [node](http://nodejs.org/)
 * [optipng](http://optipng.sourceforge.net/)
 * [phantomjs](http://phantomjs.org/)
@@ -81,18 +80,6 @@ Node packages:
 * [gify](https://github.com/visionmedia/node-gify)
 * [jshint](http://www.jshint.com/)
 * [yo](http://yeoman.io/)
-
-Vim plugins:
-
-* [ctrlp.vim](https://github.com/kien/ctrlp.vim)
-* [html5.vim](https://github.com/othree/html5.vim)
-* [syntastic](https://github.com/scrooloose/syntastic)
-* [vim-colors-solarized](https://github.com/altercation/vim-colors-solarized)
-* [vim-git](https://github.com/tpope/vim-git)
-* [vim-javascript](https://github.com/pangloss/vim-javascript)
-* [vim-markdown](https://github.com/tpope/vim-markdown)
-* [vim-mustache-handlebars](https://github.com/mustache/vim-mustache-handlebars)
-* [vim-pathogen](https://github.com/tpope/vim-pathogen)
 
 ### Custom OS X defaults
 
@@ -168,11 +155,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 ```
 
-### Local/private Bash and Vim configuration
 
-Any special-case Vim directives local to a machine should be stored in a
-`~/.vimrc.local` file on that machine. The directives will then be automatically
-imported into your master `.vimrc`.
 
 Any private and custom Bash commands and configuration should be placed in a
 `~/.bash_profile.local` file. This file will not be under version control or

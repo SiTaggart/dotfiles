@@ -2,7 +2,7 @@
 
 # bash_config
 
-# Make vim the default editor
+# Make VS Code the default editor
 export EDITOR="code -w"
 
 # Ignore duplicate commands in the history
