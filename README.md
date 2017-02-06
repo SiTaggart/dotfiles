@@ -159,6 +159,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 ```
 
+### Hyper term and configuration
+
+Download the latest version of Hyper to take advantage of the .hyper.js settings
 
 ### Local/private Bash
 
