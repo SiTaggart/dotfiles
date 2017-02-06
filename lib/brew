@@ -30,11 +30,10 @@ run_brew() {
             'node'
             'optipng'
             'phantomjs'
-            'rbenv'
-            'ruby-build'
             'nvm'
             'tree'
             'wget'
+            'yarn'
             'zsh'
             'zsh-completions'
         )
