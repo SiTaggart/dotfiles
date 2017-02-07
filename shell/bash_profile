@@ -17,12 +17,11 @@ fi
 
 load_dotfiles() {
     declare -a files=(
-        # $HOME/.rvm/scripts/rvm # Load RVM into a shell session *as a function*
         $HOME/.dotfiles/shell/bash_options # Options
         $HOME/.dotfiles/shell/bash_exports # Exports
         $HOME/.dotfiles/shell/bash_aliases # Aliases
         $HOME/.dotfiles/shell/functions/* # Functions
-        $HOME/.dotfiles/shell/bash_prompt # Custom bash prompt
+        # $HOME/.dotfiles/shell/bash_prompt # Custom bash prompt (Favour oh-my-zsh prompts)
         $HOME/.dotfiles/shell/bash_paths # Path modifications
         $(brew --prefix)/etc/bash_completion # Bash completion (installed via Homebrew)
         $HOME/.bash_profile.local # Local and private settings not under version control (e.g. git credentials)
@@ -39,5 +38,3 @@ load_dotfiles() {
 
 load_dotfiles
 unset load_dotfiles
-
-eval "$(rbenv init -)"
