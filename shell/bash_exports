@@ -30,9 +30,6 @@ export PHANTOMJS_BIN="$(brew --prefix)/bin/phantomjs"
 # shells instead of the default "last window closed" history
 export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-# Export Selenium location
-export SELENIUM_SERVER_JAR='/usr/local/lib/node_modules/protractor/selenium/selenium-server-standalone-2.44.0.jar'
-
 # Export NVM
 export NVM_DIR="$HOME/.nvm"
 . "$(brew --prefix nvm)/nvm.sh"
