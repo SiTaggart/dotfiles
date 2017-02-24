@@ -72,8 +72,7 @@ module.exports = {
     "hyperlinks",
     "hyper-blink",
     "hyperline",
-    "hyper-simple-highlight-active-session",
-    "hyperterm-paste"
+    "hyper-simple-highlight-active-session"
   ],
 
   // in development, you can create a directory under
