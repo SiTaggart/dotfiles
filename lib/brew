@@ -25,6 +25,7 @@ run_brew() {
             'bash-completion'
             'ffmpeg'
             'graphicsmagick'
+            'hub'
             'jpeg'
             'node'
             'nvm'
