@@ -96,6 +96,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# hub alias
+eval "$(hub alias -s)"
+
 POWERLEVEL9K_MODE='compatible'
 
 #########################################################################
