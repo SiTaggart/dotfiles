@@ -36,6 +36,7 @@ run_brew() {
             'yarn'
             'zsh'
             'zsh-completions'
+            'heroku'
         )
 
         for index in ${!desired_formulae[*]}
