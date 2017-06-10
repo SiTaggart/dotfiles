@@ -101,6 +101,8 @@ eval "$(hub alias -s)"
 
 POWERLEVEL9K_MODE='compatible'
 
+export PATH="$HOME/.yarn/bin:$PATH"
+
 #########################################################################
 ### TINY CARE TERMINAL https://github.com/notwaldorf/tiny-care-terminal
 #########################################################################
