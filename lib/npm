@@ -7,7 +7,7 @@ run_npm() {
         e_header "Installing Node.js packages..."
 
         # List of npm packages
-        local packages="gify bower grunt-cli gulp jshint karma eslint eslint-plugin-react babel babel-eslint typings tiny-care-terminal git-standup"
+        local packages="gify grunt-cli gulp eslint eslint-plugin-react babel-cli babel-eslint typings tiny-care-terminal git-standup"
 
         # Install packages globally and quietly
         npm install $packages --global --quiet

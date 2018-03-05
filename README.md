@@ -1,4 +1,4 @@
-# Dotfiles (Nicolas Gallagher)
+# Dotfiles (Simon Taggart)
 
 My OS X dotfiles.
 
@@ -109,42 +109,9 @@ For more information on how to setup your backup-drive, please read the
 preparatory steps in this post on creating a [Mac OS X bootable backup
 drive](http://nicolasgallagher.com/mac-osx-bootable-backup-drive-with-rsync/).
 
-### Custom bash prompt
+### iTerm Color Theme
 
-I use a custom bash prompt based on the Solarized color palette and influenced
-by @gf3's and @cowboy's custom prompts. For best results, you should install
-iTerm2 and import [Solarized
-Dark.itermcolors](https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized).
-
-When your current working directory is a Git repository, the prompt will
-display the checked-out branch's name (and failing that, the commit SHA that
-HEAD is pointing to). The state of the working tree is reflected in the
-following way:
-
-<table>
-    <tr>
-        <td><code>+</code></td>
-        <td>Uncommitted changes in the index</td>
-    </tr>
-    <tr>
-        <td><code>!</code></td>
-        <td>Unstaged changes</td>
-    </tr>
-    <tr>
-        <td><code>?</code></td>
-        <td>Untracked files</td>
-    </tr>
-    <tr>
-        <td><code>$</code></td>
-        <td>Stashed files</td>
-    </tr>
-</table>
-
-Further details are in the `bash_prompt` file.
-
-Screenshot:
-
-![](http://i.imgur.com/DSJ1G.png)
+Use Oceanic Next iTerm port, found here: [https://github.com/mhartington/oceanic-next-iterm](https://github.com/mhartington/oceanic-next-iterm)
 
 
 ### ZSH and oh-my-zsh custom prompts

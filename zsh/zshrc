@@ -51,12 +51,14 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx git-flow git-extras npm node brew nvm heroku theme web-search battery)
+plugins=(git osx git-extras npm node brew nvm heroku theme web-search yarn sudo)
 
 # User configuration
 
 source $HOME/.dotfiles/shell/bash_exports
 source $HOME/.dotfiles/shell/bash_aliases
+
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 export PATH="$PATH:/usr/bin"
 export PATH="$PATH:$HOME/sbin"
@@ -100,6 +102,8 @@ source $ZSH/oh-my-zsh.sh
 eval "$(hub alias -s)"
 
 POWERLEVEL9K_MODE='compatible'
+
+export PATH="$HOME/.yarn/bin:$PATH"
 
 #########################################################################
 ### TINY CARE TERMINAL https://github.com/notwaldorf/tiny-care-terminal
