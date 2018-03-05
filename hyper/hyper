@@ -67,12 +67,10 @@ module.exports = {
   //   `project#1.0.1`
   plugins: [
     "hyperterm-subpixel-antialiased",
-    "oceanic-next-hyperterm",
     "hyperterm-cursor",
     "hyperlinks",
     "hyper-blink",
-    "hyperline",
-    "hyper-simple-highlight-active-session"
+"oceanic-next-hyperterm"
   ],
 
   // in development, you can create a directory under
