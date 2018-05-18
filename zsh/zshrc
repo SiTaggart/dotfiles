@@ -60,6 +60,12 @@ source $HOME/.dotfiles/shell/bash_aliases
 
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+else
+    print "404: ~/.zshrc.local not found."
+fi
+
 export PATH="$PATH:/usr/bin"
 export PATH="$PATH:$HOME/sbin"
 export PATH="$PATH:$HOME/bin"
