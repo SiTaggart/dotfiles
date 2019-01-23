@@ -30,7 +30,6 @@ run_brew() {
             'node'
             'nvm'
             'optipng'
-            'phantomjs'
             'tree'
             'wget'
             'yarn'
