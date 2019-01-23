@@ -107,7 +107,7 @@ source $ZSH/oh-my-zsh.sh
 # hub alias
 eval "$(hub alias -s)"
 
-POWERLEVEL9K_MODE='compatible'
+POWERLEVEL9K_MODE='awesome-fontconfig'
 
 export PATH="$HOME/.yarn/bin:$PATH"
 
