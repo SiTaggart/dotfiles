@@ -10,7 +10,7 @@ Tools](https://developer.apple.com/downloads) and may overwrite existing
 dotfiles in your HOME.
 
 ```bash
-$ bash -c "$(curl -fsSL raw.github.com/SiTaggart/dotfiles/master/bin/dotfiles)"
+$ bash -c "$(curl -fsSL raw.github.com/SiTaggart/dotfiles/main/bin/dotfiles)"
 ```
 
 N.B. If you wish to fork this project and maintain your own dotfiles, you must
@@ -172,51 +172,6 @@ custom installation's `bin` to the PATH in a file called `~/.dotfilesrc`:
 # Add `brew` command's custom location to PATH
 PATH="/opt/acme/bin:$PATH"
 ```
-
-
-## Adding new git submodules
-
-If you want to add more git submodules, e.g., Vim plugins to be managed by
-pathogen, then follow these steps while in the root of the superproject.
-
-```bash
-# Add the new submodule
-git submodule add https://example.com/remote/path/to/repo.git vim/bundle/one-submodule
-# Initialize and clone the submodule
-git submodule update --init
-# Stage the changes
-git add vim/bundle/one-submodule
-# Commit the changes
-git commit -m "Add a new submodule: one-submodule"
-```
-
-
-## Updating git submodules
-
-Updating individual submodules within the superproject:
-
-```bash
-# Change to the submodule directory
-cd vim/bundle/one-submodule
-# Checkout the desired branch (of the submodule)
-git checkout master
-# Pull from the tip of master (of the submodule - could be any sha or pointer)
-git pull origin master
-# Go back to main dotfiles repo root
-cd ../../..
-# Stage the submodule changes
-git add vim/bundle/one-submodule
-# Commit the submodule changes
-git commit -m "Update submodule 'one-submodule' to the latest version"
-# Push to a remote repository
-git push origin master
-```
-
-Now, if anyone updates their local repository from the remote repository, then
-using `git submodule update` will update the submodules (that have been
-initialized) in their local repository. N.B This will wipe away any local
-changes made to those submodules.
-
 
 ## Acknowledgements
 
