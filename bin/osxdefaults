@@ -13,7 +13,7 @@ defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
 # Always show scrollbars
-defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
+defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
 # Save to disk (not to iCloud) by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
@@ -56,7 +56,7 @@ defaults write com.apple.dock mru-spaces -bool false
 defaults write com.apple.dock no-glass -bool true
 
 # Dock: position the Dock on the left
-defaults write com.apple.dock orientation left
+defaults write com.apple.dock orientation bottom
 
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
