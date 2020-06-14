@@ -71,7 +71,7 @@ fi
 # Initialize the git repository if it's missing
 if ! is_git_repo; then
     e_header "Initializing git repository..."
-    git init
+    git init && git symbolic-ref HEAD refs/heads/main
     git remote add origin ${DOTFILES_GIT_REMOTE}
     git fetch origin main
     # Reset the index and working tree to the fetched HEAD

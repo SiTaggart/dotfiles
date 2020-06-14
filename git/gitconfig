@@ -46,7 +46,7 @@
 
     delete-merged-branches = "!f() { git checkout --quiet main && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f"
 
-    new = '!git init && git symbolic-ref HEAD refs/heads/main'
+    new = 'git init && git symbolic-ref HEAD refs/heads/main'
 
 [color]
     # color opts: normal, black, red, green, yellow, blue, magenta, cyan, or white
