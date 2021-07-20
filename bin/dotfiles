@@ -18,6 +18,7 @@ fi
 
 # Here we go.. ask for the administrator password upfront and run a
 # keep-alive to update existing `sudo` time stamp until script has finished
+e_header "Asking for admin password..."
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
@@ -60,11 +61,11 @@ done
 # -----------------------------------------------------------------------------
 if type xcode-select >&- && xpath=$( xcode-select --print-path ) &&
 	test -d "${xpath}" && test -x "${xpath}" ; then
-	print_success_muted "Xcode already installed. Skipping."
+	e_header "Xcode already installed. Skipping."
 else
 	step "Installing Xcode…"
 	xcode-select --install
-	print_success "Xcode installed!"
+	e_success "Xcode installed!"
 fi
 
 # Before relying on Homebrew, check that packages can be compiled
@@ -113,10 +114,11 @@ else
 fi
 
 
-echo "Do you need a new SSH key? (y/n)"
-read -r response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  run_ssh
+# Ask if you need a new ssh key
+seek_confirmation "Do you need a new SSH key?"
+
+if is_confirmed; then
+    run_ssh
 fi
 
 # Install and update packages
