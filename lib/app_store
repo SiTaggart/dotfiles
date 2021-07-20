@@ -1,0 +1,29 @@
+#!/bin/bash
+
+run_app_store() {
+
+#############################################
+### Installs from Mac App Store
+#############################################
+
+echo "Installing apps from the App Store..."
+
+### find app ids with: mas search "app name"
+brew install mas
+
+### Mas login is currently broken on mojave. See:
+### Login manually for now.
+
+echo "Need to log in to App Store manually to install apps with mas...."
+echo "Opening App Store. Please login."
+open "/Applications/App Store.app"
+echo "Is app store login complete.(y/n)? "
+read response
+if [ "$response" != "${response#[Yy]}" ]
+then
+	mas install 587512244  # Kaleidoscope
+	mas install 405772121  # LittleIpsum
+else
+	cecho "App Store login not complete. Skipping installing App Store Apps" $red
+fi
+}

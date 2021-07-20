@@ -16,6 +16,11 @@ if [[ ! -d ${DOTFILES_DIRECTORY} ]]; then
     rm -rf ${HOME}/dotfiles.tar.gz
 fi
 
+# Here we go.. ask for the administrator password upfront and run a
+# keep-alive to update existing `sudo` time stamp until script has finished
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 cd ${DOTFILES_DIRECTORY}
 
 source ./lib/help
@@ -23,6 +28,10 @@ source ./lib/list
 source ./lib/utils
 source ./lib/brew
 source ./lib/npm
+source ./lib/ssh
+source ./lib/app_store
+source ./lib/oh_my_zsh
+source ./lib/fonts
 
 # Help text
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then
@@ -46,6 +55,18 @@ do
     esac
 done
 
+# -----------------------------------------------------------------------------
+# XCode
+# -----------------------------------------------------------------------------
+if type xcode-select >&- && xpath=$( xcode-select --print-path ) &&
+	test -d "${xpath}" && test -x "${xpath}" ; then
+	print_success_muted "Xcode already installed. Skipping."
+else
+	step "Installing Xcode…"
+	xcode-select --install
+	print_success "Xcode installed!"
+fi
+
 # Before relying on Homebrew, check that packages can be compiled
 if ! type_exists 'gcc'; then
     e_error "The XCode Command Line Tools must be installed first."
@@ -57,13 +78,12 @@ fi
 # Check for Homebrew
 if ! type_exists 'brew'; then
     e_header "Installing Homebrew..."
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    ## Don't prompt for confirmation when installing homebrew
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
 fi
 
 # Check for git
 if ! type_exists 'git'; then
-    e_header "Updating Homebrew..."
-    brew update
     e_header "Installing Git..."
     brew install git
 fi
@@ -92,6 +112,13 @@ else
     git submodule update --recursive --init --quiet
 fi
 
+
+echo "Do you need a new SSH key? (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  run_ssh
+fi
+
 # Install and update packages
 if [[ $no_packages ]]; then
     printf "Skipped package installations.\n"
@@ -101,6 +128,12 @@ else
     run_brew
     # Install Node packages
     run_npm
+    # Install App Store applications
+    run_app_store
+    # Install oh-my-zsh
+    run_oh_my_zsh
+    # Install fonts
+    run_fonts
 fi
 
 link() {

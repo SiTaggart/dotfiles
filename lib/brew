@@ -14,6 +14,11 @@ run_brew() {
         brew upgrade
         [[ $? ]] && e_success "Done"
 
+        e_header "Tapping cask..."
+        # Install brew cask
+        brew tap caskroom/cask
+        [[ $? ]] && e_success "Done"
+
         e_header "Checking status of desired Homebrew formulae..."
         local list_formulae
         local -a missing_formulae
@@ -25,7 +30,6 @@ run_brew() {
             'bash-completion'
             'ffmpeg'
             'graphicsmagick'
-            'hub'
             'jpeg'
             'node'
             'nvm'
@@ -36,7 +40,10 @@ run_brew() {
             'zsh'
             'zsh-completions'
             'zsh-autosuggestions'
-            'heroku/brew/heroku'
+            'gh'
+            'mas'
+            'postgresql'
+            'grep'
         )
 
         for index in ${!desired_formulae[*]}
@@ -61,6 +68,44 @@ run_brew() {
         # use latest rsync rather than out-dated OS X rsync
         # install separately from the main formulae list to fix gh-19
         brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/master/Formula/rsync.rb
+
+        # Install Homebrew casks
+        e_header "Install cask apps..."
+        brew cask install moom
+        brew cask install 1password
+        brew cask install aerial
+        brew cask install iterm2
+        brew cask install docker
+        brew cask install visual-studio-code
+        brew cask install notion
+        brew cask install ImageOptim
+        brew cask install alfred
+        brew cask install dropbox
+        brew cask install keycastr
+        brew cask install caffeine
+        brew cask install cloudapp
+        ### Quicklook plugins https://github.com/sindresorhus/quick-look-plugins
+        brew cask install qlcolorcode # syntax highlighting in preview
+        brew cask install qlstephen  # preview plaintext files without extension
+        brew cask install qlmarkdown  # preview markdown files
+        brew cask install quicklook-json  # preview json files
+        brew cask install slack
+        brew cask install zoomus
+        brew cask install signal
+        brew cask install hot
+        brew cask install bartender
+        brew cask install pika
+        brew cask install loom
+        brew cask install rescuetime
+        brew cask install clocker
+        brew cask install fantastical
+        brew cask install tweetbot
+        brew cask install kap
+        brew cask install postman
+        brew cask install rocket
+        brew cask install firefox
+        brew cask install google-chrome
+        [[ $? ]] && e_success "Done"
 
         # Remove outdated versions from the Cellar
         brew cleanup
