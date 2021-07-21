@@ -8,9 +8,6 @@ run_app_store() {
 
 echo "Installing apps from the App Store..."
 
-### find app ids with: mas search "app name"
-brew install mas
-
 ### Mas login is currently broken on mojave. See:
 ### Login manually for now.
 

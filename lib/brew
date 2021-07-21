@@ -16,7 +16,7 @@ run_brew() {
 
         e_header "Tapping cask..."
         # Install brew cask
-        brew tap caskroom/cask
+        brew tap homebrew/cask
         [[ $? ]] && e_success "Done"
 
         e_header "Checking status of desired Homebrew formulae..."
@@ -35,6 +35,7 @@ run_brew() {
             'nvm'
             'optipng'
             'tree'
+            'svn'
             'wget'
             'yarn'
             'zsh'
@@ -71,40 +72,40 @@ run_brew() {
 
         # Install Homebrew casks
         e_header "Install cask apps..."
-        brew cask install moom
-        brew cask install 1password
-        brew cask install aerial
-        brew cask install iterm2
-        brew cask install docker
-        brew cask install visual-studio-code
-        brew cask install notion
-        brew cask install ImageOptim
-        brew cask install alfred
-        brew cask install dropbox
-        brew cask install keycastr
-        brew cask install caffeine
-        brew cask install cloudapp
+        brew install --cask moom
+        brew install --cask 1password
+        brew install --cask aerial
+        brew install --cask iterm2
+        brew install --cask docker
+        brew install --cask visual-studio-code
+        brew install --cask notion
+        brew install --cask ImageOptim
+        brew install --cask alfred
+        brew install --cask dropbox
+        brew install --cask keycastr
+        brew install --cask caffeine
+        brew install --cask cloudapp
         ### Quicklook plugins https://github.com/sindresorhus/quick-look-plugins
-        brew cask install qlcolorcode # syntax highlighting in preview
-        brew cask install qlstephen  # preview plaintext files without extension
-        brew cask install qlmarkdown  # preview markdown files
-        brew cask install quicklook-json  # preview json files
-        brew cask install slack
-        brew cask install zoomus
-        brew cask install signal
-        brew cask install hot
-        brew cask install bartender
-        brew cask install pika
-        brew cask install loom
-        brew cask install rescuetime
-        brew cask install clocker
-        brew cask install fantastical
-        brew cask install tweetbot
-        brew cask install kap
-        brew cask install postman
-        brew cask install rocket
-        brew cask install firefox
-        brew cask install google-chrome
+        brew install --cask qlcolorcode # syntax highlighting in preview
+        brew install --cask qlstephen  # preview plaintext files without extension
+        brew install --cask qlmarkdown  # preview markdown files
+        brew install --cask quicklook-json  # preview json files
+        brew install --cask slack
+        brew install --cask zoomus
+        brew install --cask signal
+        brew install --cask hot
+        brew install --cask bartender
+        brew install --cask pika
+        brew install --cask loom
+        brew install --cask rescuetime
+        brew install --cask clocker
+        brew install --cask fantastical
+        brew install --cask tweetbot
+        brew install --cask kap
+        brew install --cask postman
+        brew install --cask rocket
+        brew install --cask firefox
+        brew install --cask google-chrome
         [[ $? ]] && e_success "Done"
 
         # Remove outdated versions from the Cellar
