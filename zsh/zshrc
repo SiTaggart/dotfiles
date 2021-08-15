@@ -58,7 +58,7 @@ plugins=(git npm yarn sudo)
 source $HOME/.dotfiles/shell/bash_exports
 source $HOME/.dotfiles/shell/bash_aliases
 
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
@@ -105,9 +105,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias gcm="git checkout main"
-
-# hub alias
-eval "$(hub alias -s)"
 
 POWERLEVEL9K_MODE='awesome-fontconfig'
 

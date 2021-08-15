@@ -20,6 +20,7 @@ if [ "$response" != "${response#[Yy]}" ]
 then
 	mas install 587512244  # Kaleidoscope
 	mas install 405772121  # LittleIpsum
+	mas install 419330170  # Moom
 else
 	cecho "App Store login not complete. Skipping installing App Store Apps" $red
 fi

@@ -72,7 +72,6 @@ run_brew() {
 
         # Install Homebrew casks
         e_header "Install cask apps..."
-        brew install --cask moom
         brew install --cask 1password
         brew install --cask aerial
         brew install --cask iterm2
