@@ -84,7 +84,7 @@ run_brew() {
         brew install --cask keycastr
         brew install --cask caffeine
         brew install --cask slack
-        brew install --cask zoomus
+        brew install --cask zoom
         brew install --cask signal
         brew install --cask hot
         brew install --cask bartender
@@ -104,7 +104,7 @@ run_brew() {
         brew install --cask rescuetime
         brew install --cask loom
         brew install --cask discord
-        brew install --cash authy
+        brew install --cask authy
         [[ $? ]] && e_success "Done"
 
         # Remove outdated versions from the Cellar
