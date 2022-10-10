@@ -73,22 +73,16 @@ run_brew() {
         # Install Homebrew casks
         e_header "Install cask apps..."
         brew install --cask 1password
-        brew install --cask aerial
         brew install --cask iterm2
         brew install --cask docker
         brew install --cask visual-studio-code
         brew install --cask notion
+        brew install --cask obsidian
         brew install --cask ImageOptim
         brew install --cask alfred
         brew install --cask dropbox
         brew install --cask keycastr
         brew install --cask caffeine
-        brew install --cask cloudapp
-        ### Quicklook plugins https://github.com/sindresorhus/quick-look-plugins
-        brew install --cask qlcolorcode # syntax highlighting in preview
-        brew install --cask qlstephen  # preview plaintext files without extension
-        brew install --cask qlmarkdown  # preview markdown files
-        brew install --cask quicklook-json  # preview json files
         brew install --cask slack
         brew install --cask zoomus
         brew install --cask signal
@@ -105,6 +99,12 @@ run_brew() {
         brew install --cask rocket
         brew install --cask firefox
         brew install --cask google-chrome
+        brew install --cask microsoft-edge
+        brew install --cask sidenotes
+        brew install --cask rescuetime
+        brew install --cask loom
+        brew install --cask discord
+        brew install --cash authy
         [[ $? ]] && e_success "Done"
 
         # Remove outdated versions from the Cellar
