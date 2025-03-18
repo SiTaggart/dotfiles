@@ -94,6 +94,7 @@ run_brew() {
         brew install --cask chatgpt
         brew install --cask claude
         brew install --cask cursor
+        brew install --cask figma
         [[ $? ]] && e_success "Done"
 
         # Remove outdated versions from the Cellar
