@@ -24,7 +24,6 @@ source ./lib/utils
 source ./lib/brew
 source ./lib/npm
 source ./lib/ssh
-source ./lib/app_store
 source ./lib/oh_my_zsh
 source ./lib/fonts
 
@@ -130,8 +129,6 @@ else
     run_brew
     # Install Node packages
     run_npm
-    # Install App Store applications
-    run_app_store
     # Install oh-my-zsh
     run_oh_my_zsh
     # Install fonts
@@ -158,7 +155,6 @@ mirrorfiles() {
     link "shell/inputrc"      ".inputrc"
     link "git/gitattributes"  ".gitattributes"
     link "git/gitignore"      ".gitignore"
-    link "hyper/hyper"        ".hyper.js"
     link "zsh/zshrc"          ".zshrc"
 
     e_success "Dotfiles update complete!"

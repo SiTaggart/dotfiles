@@ -2,7 +2,6 @@
 
 My OS X dotfiles.
 
-
 ## How to install
 
 The installation step requires the [XCode Command Line
@@ -21,10 +20,10 @@ found at the top of the `bin/dotfiles` script.
 
 You should run the update when:
 
-* You make a change to `~/.dotfiles/git/gitconfig` (the only file that is
+- You make a change to `~/.dotfiles/git/gitconfig` (the only file that is
   copied rather than symlinked).
-* You want to pull changes from the remote repository.
-* You want to update Homebrew formulae and Node packages.
+- You want to pull changes from the remote repository.
+- You want to update Homebrew formulae and Node packages.
 
 Run the dotfiles command:
 
@@ -53,37 +52,36 @@ Options:
     </tr>
 </table>
 
-
 ## Features
 
 ### Automatic software installation
 
 Homebrew formulae:
 
-* GNU core utilities
-* [git](http://git-scm.com/)
-* [ack](http://betterthangrep.com/)
-* bash (latest version)
-* [bash-completion](http://bash-completion.alioth.debian.org/)
-* [ffmpeg](http://ffmpeg.org/)
-* [graphicsmagick](http://www.graphicsmagick.org/)
-* [jpeg](https://en.wikipedia.org/wiki/Libjpeg)
-* [node](http://nodejs.org/)
-* nvm
-* [optipng](http://optipng.sourceforge.net/)
-* [phantomjs](http://phantomjs.org/)
-* [rsync](https://rsync.samba.org/) (latest version, rather than the out-dated OS X installation)
-* [tree](http://mama.indstate.edu/users/ice/tree/)
-* [wget](http://www.gnu.org/software/wget/)
-* Yarn
-* zsh
-* zsh-completion
+- GNU core utilities
+- [git](http://git-scm.com/)
+- [ack](http://betterthangrep.com/)
+- bash (latest version)
+- [bash-completion](http://bash-completion.alioth.debian.org/)
+- [ffmpeg](http://ffmpeg.org/)
+- [graphicsmagick](http://www.graphicsmagick.org/)
+- [jpeg](https://en.wikipedia.org/wiki/Libjpeg)
+- [node](http://nodejs.org/)
+- nvm
+- [optipng](http://optipng.sourceforge.net/)
+- [phantomjs](http://phantomjs.org/)
+- [rsync](https://rsync.samba.org/) (latest version, rather than the out-dated OS X installation)
+- [tree](http://mama.indstate.edu/users/ice/tree/)
+- [wget](http://www.gnu.org/software/wget/)
+- Yarn
+- zsh
+- zsh-completion
 
 Node packages:
 
-* [gify](https://github.com/visionmedia/node-gify)
-* [jshint](http://www.jshint.com/)
-* [yo](http://yeoman.io/)
+- [gify](https://github.com/visionmedia/node-gify)
+- [jshint](http://www.jshint.com/)
+- [yo](http://yeoman.io/)
 
 ### Custom OS X defaults
 
@@ -113,7 +111,6 @@ drive](http://nicolasgallagher.com/mac-osx-bootable-backup-drive-with-rsync/).
 
 Use Oceanic Next iTerm port, found here: [https://github.com/mhartington/oceanic-next-iterm](https://github.com/mhartington/oceanic-next-iterm)
 
-
 ### ZSH and oh-my-zsh custom prompts
 
 This can be run with ZSH shell, running an external theme called PowerLevel9k. Ensure you install oh-my-zsh and the theme
@@ -122,13 +119,10 @@ to take advantage of the `.zshrc` settings.
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
+
 ```bash
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 ```
-
-### Hyper term and configuration
-
-Download the latest version of Hyper to take advantage of the .hyper.js settings
 
 ### Local/private Bash
 
@@ -177,13 +171,13 @@ PATH="/opt/acme/bin:$PATH"
 
 Inspiration and code was taken from many sources, including:
 
-* [@mathiasbynens](https://github.com/mathiasbynens) (Mathias Bynens)
+- [@mathiasbynens](https://github.com/mathiasbynens) (Mathias Bynens)
   [https://github.com/mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)
-* [@tejr](https://github.com/tejr) (Tom Ryder)
+- [@tejr](https://github.com/tejr) (Tom Ryder)
   [https://github.com/tejr/dotfiles](https://github.com/tejr/dotfiles)
-* [@gf3](https://github.com/gf3) (Gianni Chiappetta)
+- [@gf3](https://github.com/gf3) (Gianni Chiappetta)
   [https://github.com/gf3/dotfiles](https://github.com/gf3/dotfiles)
-* [@cowboy](https://github.com/cowboy) (Ben Alman)
+- [@cowboy](https://github.com/cowboy) (Ben Alman)
   [https://github.com/cowboy/dotfiles](https://github.com/cowboy/dotfiles)
-* [@alrra](https://github.com/alrra) (Cãtãlin Mariş)
+- [@alrra](https://github.com/alrra) (Cãtãlin Mariş)
   [https://github.com/alrra/dotfiles](https://github.com/alrra/dotfiles)
