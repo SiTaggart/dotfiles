@@ -50,4 +50,6 @@ alias hidedeskicons="defaults write com.apple.finder CreateDesktop -bool false &
 # Git
 alias gti="git"
 
-#alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl ."
+# GitHub
+alias prs="gh pr ls --author \"@me\""
+alias reviews="gh pr list --search \"user-review-requested:@me\""

@@ -65,38 +65,56 @@ run_brew() {
         brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/master/Formula/rsync.rb
 
         # Install Homebrew casks
-        e_header "Install cask apps..."
-        brew install --cask 1password
-        brew install --cask iterm2
-        brew install --cask docker
-        brew install --cask visual-studio-code
-        brew install --cask visual-studio-code@insiders
-        brew install --cask notion
-        brew install --cask obsidian
-        brew install --cask ImageOptim
-        brew install --cask raycast
-        brew install --cask dropbox
-        brew install --cask keycastr
-        brew install --cask caffeine
-        brew install --cask slack
-        brew install --cask zoom
-        brew install --cask hot
-        brew install --cask pika
-        brew install --cask loom
-        brew install --cask rescuetime
-        brew install --cask kap
-        brew install --cask postman
-        brew install --cask rocket
-        brew install --cask firefox
-        brew install --cask google-chrome
-        brew install --cask microsoft-edge
-        brew install --cask discord
-        brew install --cask chatgpt
-        brew install --cask claude
-        brew install --cask cursor
-        brew install --cask figma
-        [[ $? ]] && e_success "Done"
+        e_header "Checking status of desired Homebrew casks..."
+        local list_casks
+        local -a missing_casks
+        local -a desired_casks=(
+            '1password'
+            'iterm2'
+            'docker'
+            'visual-studio-code'
+            'visual-studio-code@insiders'
+            'notion'
+            'obsidian'
+            'imageoptim' # Changed from ImageOptim for consistency
+            'raycast'
+            'dropbox'
+            'keycastr'
+            'caffeine'
+            'slack'
+            'zoom'
+            'hot'
+            'pika'
+            'loom'
+            'rescuetime'
+            'kap'
+            'bruno'
+            'rocket'
+            'firefox'
+            'google-chrome'
+            'microsoft-edge'
+            'discord'
+            'chatgpt'
+            'claude'
+            'cursor'
+            'figma'
+        )
 
+        for cask_name in ${desired_casks[*]}
+        do
+            if ! cask_exists $cask_name; then
+                missing_casks+=("$cask_name")
+            fi
+        done
+
+        if [[ ${#missing_casks[@]} -ne 0 ]]; then
+            list_casks=$( printf "%s " "${missing_casks[@]}" )
+            e_header "Installing missing Homebrew casks: $list_casks"
+            brew install --cask $list_casks
+            [[ $? ]] && e_success "Done"
+        else
+            e_success "All desired casks already installed."
+        fi
         # Remove outdated versions from the Cellar
         brew cleanup
     else
