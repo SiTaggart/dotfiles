@@ -70,7 +70,7 @@ run_brew() {
         local -a missing_casks
         local -a desired_casks=(
             '1password'
-            'iterm2'
+            'ghostty'
             'docker'
             'visual-studio-code'
             'visual-studio-code@insiders'
