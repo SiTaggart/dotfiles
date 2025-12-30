@@ -1,239 +1,220 @@
 #!/bin/bash
 
-# Set custom OS X defaults
+# Set custom macOS defaults
 # See: github.com/mathiasbynens/dotfiles
+
+if [[ "$(uname -s)" != "Darwin" ]]; then
+    printf "bin/osxdefaults: macOS only (Darwin).\n" >&2
+    exit 0
+fi
+
+# NOTE: This file is intentionally conservative for modern macOS (Tahoe 26+).
+# macOS changes preference domains/keys frequently; anything questionable should
+# be left out rather than writing prefs that no longer apply.
+
+# Close System Settings / System Preferences to avoid it overriding changes.
+osascript -e 'tell application "System Settings" to quit' >/dev/null 2>&1 || true
+osascript -e 'tell application "System Preferences" to quit' >/dev/null 2>&1 || true
+
+write_default() {
+    defaults write "$@" || printf "Warning: defaults write failed: %s\n" "$*" >&2
+}
+
+write_current_host_default() {
+    defaults -currentHost write "$@" || printf "Warning: defaults -currentHost write failed: %s\n" "$*" >&2
+}
 
 # General UI/UX
 # ----------------------------------------------------------------------
 
-# Disable Menu bar transparency
-defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
-
-# Enable snap-to-grid for desktop icons
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-
 # Always show scrollbars
-defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+write_default NSGlobalDomain AppleShowScrollBars -string "Always"
 
 # Save to disk (not to iCloud) by default
-defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+write_default NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Automatically quit printer app once the print jobs complete
-defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+write_default com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
 # Disable automatic termination of inactive apps
-defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
+write_default NSGlobalDomain NSDisableAutomaticTermination -bool true
 
 # Disable Resume system-wide
-defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
+write_default NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 
 # Disable press-and-hold for keys in favor of key repeat
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+write_default NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
-
-# Trackpad: swipe between pages with three fingers
-defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerHorizSwipeGesture -int 1
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 1
-
-# Trackpad: map bottom right corner to right-click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+write_default NSGlobalDomain KeyRepeat -int 1
+write_default NSGlobalDomain InitialKeyRepeat -int 10
 
 # Don’t automatically rearrange Spaces based on most recent use
-defaults write com.apple.dock mru-spaces -bool false
+write_default com.apple.dock mru-spaces -bool false
 
 
 # Dock
 # ----------------------------------------------------------------------
 
-# Dock: enable the 2D Dock
-defaults write com.apple.dock no-glass -bool true
-
 # Dock: position the Dock on the bottom
-defaults write com.apple.dock orientation bottom
+write_default com.apple.dock orientation -string "bottom"
 
 # Automatically hide and show the Dock
-defaults write com.apple.dock autohide -bool true
+write_default com.apple.dock autohide -bool true
 
 # Dock: set the icon size of Dock items to 36 pixels
-defaults write com.apple.dock tilesize -int 36
+write_default com.apple.dock tilesize -int 36
 
 # Dock: show indicator lights for open applications
-defaults write com.apple.dock show-process-indicators -bool true
+write_default com.apple.dock show-process-indicators -bool true
 
 # Dock: make icons of hidden applications translucent
-defaults write com.apple.dock showhidden -bool true
+write_default com.apple.dock showhidden -bool true
 
 # Dock: don’t animate opening applications
-defaults write com.apple.dock launchanim -bool false
+write_default com.apple.dock launchanim -bool false
 
 # Dock: use the scale effect for window minimizing
-defaults write com.apple.dock mineffect scale
+write_default com.apple.dock mineffect -string "scale"
 
 # Dock: speed up Mission Control animations
-defaults write com.apple.dock expose-animation-duration -float 0.1
+write_default com.apple.dock expose-animation-duration -float 0.1
 
 
 # Finder
 # ----------------------------------------------------------------------
 
 # Finder: show all filename extensions
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+write_default NSGlobalDomain AppleShowAllExtensions -bool true
 
 # Finder: disable the warning when changing a file extension
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-
-# Finder: empty Trash securely by default
-defaults write com.apple.finder EmptyTrashSecurely -bool true
+write_default com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 # Finder: disable window and Get Info animations
-defaults write com.apple.finder DisableAllAnimations -bool true
+write_default com.apple.finder DisableAllAnimations -bool true
 
 # Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
-defaults write com.apple.finder QuitMenuItem -bool true
+write_default com.apple.finder QuitMenuItem -bool true
 
-# Finder: show the ~/Library folder (in OS X Lion)
+# Finder: show the ~/Library folder (macOS)
 chflags nohidden ~/Library
 
 # Finder: show hidden files by default
-defaults write com.apple.finder AppleShowAllFiles -bool true
+write_default com.apple.finder AppleShowAllFiles -bool true
 
 # Finder: use list view in all windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
-defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+write_default com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # Show icons for hard drives, servers, and removable media on the desktop
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+write_default com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+write_default com.apple.finder ShowHardDrivesOnDesktop -bool true
+write_default com.apple.finder ShowMountedServersOnDesktop -bool true
+write_default com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 
 # Panels
 # ----------------------------------------------------------------------
 
 # Panels: expand save panel by default
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+write_default NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+write_default NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 
 # Panels: expand print panel by default
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+write_default NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+write_default NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
-# Panels: disable the “Are you sure you want to open this application?” dialog
-defaults write com.apple.LaunchServices LSQuarantine -bool false
+# Panels: LSQuarantine controls whether files downloaded by certain apps get a "quarantine"
+# attribute. Disabling it weakens macOS security protections (Gatekeeper warnings).
+# If you understand the trade-off, uncomment:
+# write_default com.apple.LaunchServices LSQuarantine -bool false
 
 # Panels: enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+write_default NSGlobalDomain AppleKeyboardUIMode -int 3
 
 
 # Screen
 # ----------------------------------------------------------------------
 
 # Screen: require password immediately after sleep or screen saver begins
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
+write_default com.apple.screensaver askForPassword -int 1
+write_default com.apple.screensaver askForPasswordDelay -int 0
 
-# Screen: save screenshots to the desktop
-defaults write com.apple.screencapture location -string "$HOME/Desktop/screenshots"
+# Screen: save screenshots to ~/Desktop/Screenshots
+mkdir -p "$HOME/Desktop/Screenshots"
+write_default com.apple.screencapture location -string "$HOME/Desktop/Screenshots"
 
 # Screen: disable shadow in screenshots
-defaults write com.apple.screencapture disable-shadow -bool true
-
-# Screen: enable subpixel font rendering on non-Apple LCDs
-defaults write NSGlobalDomain AppleFontSmoothing -int 2
+write_default com.apple.screencapture disable-shadow -bool true
 
 
 # Disks
 # ----------------------------------------------------------------------
 
 # Disks: avoid creating .DS_Store files on network volumes
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+write_default com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 # Disks: disable Time Machine prompts
-defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+write_default com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # Disks: disable disk image verification
-# defaults write com.apple.frameworks.diskimages skip-verify -bool true
-# defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
-# defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
-
-
-# iTunes
-# ----------------------------------------------------------------------
-
-# iTunes: make ⌘ + F focus the search input
-defaults write com.apple.iTunes NSUserKeyEquivalents -dict-add "Target Search Field" "@F"
-
-# iTunes: disable the Ping sidebar in iTunes
-defaults write com.apple.iTunes disablePingSidebar -bool true
-
-# iTunes: disable all the other Ping stuff
-defaults write com.apple.iTunes disablePing -bool true
+# write_default com.apple.frameworks.diskimages skip-verify -bool true
+# write_default com.apple.frameworks.diskimages skip-verify-locked -bool true
+# write_default com.apple.frameworks.diskimages skip-verify-remote -bool true
 
 # Safari
 # ----------------------------------------------------------------------
 
 # Press Tab to highlight each item on a web page
-defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
+write_default com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
+write_default com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
 
 # Show the full URL in the address bar (note: this still hides the scheme)
-defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
+write_default com.apple.Safari ShowFullURLInSmartSearchField -bool true
 
 # Enable the Develop menu and the Web Inspector in Safari
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
-
-# Enable “Do Not Track”
-defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
+write_default com.apple.Safari IncludeDevelopMenu -bool true
+write_default com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+write_default com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
 
 # iTerm2
 # ----------------------------------------------------------------------
 
 # Don’t display the annoying prompt when quitting iTerm
-defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+write_default com.googlecode.iterm2 PromptOnQuit -bool false
 
 # Photos
 # ----------------------------------------------------------------------
 
 # Prevent Photos from opening automatically when devices are plugged in
-defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+write_current_host_default com.apple.ImageCapture disableHotPlug -bool true
 
 ###############################################################################
 # Mac App Store                                                               #
 ###############################################################################
 
 # Enable the automatic update check
-defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+write_default com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 
 # Download newly available updates in background
-defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+write_default com.apple.SoftwareUpdate AutomaticDownload -int 1
 
 # Install System data files & security updates
-defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
+write_default com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
 
 
 # Misc
 # ----------------------------------------------------------------------
 
-# Misc: only use UTF-8 in Terminal.app
-defaults write com.apple.terminal StringEncodings -array 4
-
 # Misc: disable Dictionary results
-defaults write com.apple.spotlight DictionaryLookupEnabled -bool false
+write_default com.apple.spotlight DictionaryLookupEnabled -bool false
 
 # Misc: disable auto-correct
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+write_default NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # Disable smart quotes and smart dashes
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+write_default NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+write_default NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
-for app in "Dashboard" "Dock" "Finder" "Photos" "Safari" "SystemUIServer" "Terminal" "iTunes"; do
-    killall "$app" > /dev/null 2>&1
+for app in "Dock" "Finder" "Photos" "Safari" "SystemUIServer" "Terminal"; do
+    killall "$app" >/dev/null 2>&1 || true
 done

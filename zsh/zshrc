@@ -1,13 +1,11 @@
+# Kiro CLI pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-#!/bin/bash
-# Amazon Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
@@ -60,28 +58,29 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(git brew npm bun sudo)
+plugins=(git brew npm bun sudo)
 
 # User configuration
 
 source $HOME/.dotfiles/shell/bash_exports
 source $HOME/.dotfiles/shell/bash_aliases
 
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[[ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-export PATH="$PATH:/usr/bin"
+[[ -d /opt/homebrew/bin ]] && export PATH="/opt/homebrew/bin:$PATH"
+[[ -d /opt/homebrew/sbin ]] && export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="$PATH:$HOME/sbin"
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:$HOME/.dotfiles/bin"
-export PATH="$PATH:$(brew --prefix coreutils)/libexec/gnubin" # Add brew-installed GNU core utilities bin
-export PATH="$PATH:$(brew --prefix)/share/npm/bin" # Add npm-installed package bin
-export PATH="$PATH:$(brew --prefix nvm)/nvm.sh" # Add nvm
 export PATH="$PATH:$HOME/heroku/bin"
+
+if command -v brew >/dev/null 2>&1; then
+  coreutils_prefix="$(brew --prefix coreutils 2>/dev/null || true)"
+  [[ -n "${coreutils_prefix}" ]] && export PATH="$PATH:${coreutils_prefix}/libexec/gnubin"
+fi
 
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
-else
-    print "404: ~/.zshrc.local not found."
 fi
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -124,11 +123,10 @@ eval "$(fnm env --use-on-cd)"
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
 # Created by `pipx` on 2025-03-18 15:13:29
-export PATH="$PATH:/Users/staggart/.local/bin"
-export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
 
 # pnpm
-export PNPM_HOME="/Users/staggart/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -136,13 +134,16 @@ esac
 # pnpm end
 
 # fnm
-export PATH="/Users/staggart/Library/Application Support/fnm:$PATH"
+export PATH="$HOME/Library/Application Support/fnm:$PATH"
 eval "`fnm env --use-on-cd --version-file-strategy recursive --shell zsh`"
-
-# Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)" # Added by Antigravity
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+
+# Kiro CLI post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"

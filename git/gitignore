@@ -1,20 +1,27 @@
-# OS or Editor files
-._*
-.DS_Store
-Thumbs.db
+# Global gitignore file
 
-# Files that might appear on external disks
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
 .Spotlight-V100
 .Trashes
 
-# Always-ignore extensions
+# Editor/OS
 *~
-*.diff
-*.err
-*.log
-*.orig
-*.pyc
-*.rej
-*.sass-cache
-*.sw?
-*.vi
+*.swp
+
+# Ignore Cursor personal rules
+**/.cursor/rules/_personal/
+**/.github/instructions/_personal/
+**/.github/prompts/
+**/.claude/settings.local.json
+**/.claude/hooks.mjs
+**/.opencode/
+opencode.jsonc
+opencode.json
+**/.ai/
+.playwright-mcp/
+.repoprompt/

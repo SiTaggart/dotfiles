@@ -4,7 +4,7 @@ run_list() {
 
 cat <<EOT
 
-OS X dotfiles - Simon Taggart - http://simontaggart.com/
+macOS dotfiles - Simon Taggart - http://simontaggart.com/
 
 Additional software to install
 
@@ -24,7 +24,6 @@ Other:
     CloudApp
     Dropbox
     Moom
-    Dropbox
     Sip
     1Password
     Skype

@@ -8,12 +8,12 @@ pyserver() {
     # Open in the browser
     open "http://localhost:${port}/"
 
-    # Redefining the default content-type to text/plain instead of the default
-    # application/octet-stream allows "unknown" files to be viewable in-browser
-    # as text instead of being downloaded.
-    #
-    # Unfortunately, "python -m SimpleHTTPServer" doesn't allow you to redefine
-    # the default content-type, but the SimpleHTTPServer module can be executed
-    # manually with just a few lines of code.
-    python -c $'import SimpleHTTPServer;\nSimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map[""] = "text/plain";\nSimpleHTTPServer.test();' "$port"
+    if command -v python3 >/dev/null 2>&1; then
+        python3 -m http.server "$port"
+    elif command -v python >/dev/null 2>&1; then
+        python -m http.server "$port"
+    else
+        printf "Error: python3 (or python) not found.\n" >&2
+        return 1
+    fi
 }

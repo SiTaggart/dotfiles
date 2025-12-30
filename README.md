@@ -1,6 +1,6 @@
 # Dotfiles (Simon Taggart)
 
-My OS X dotfiles.
+My macOS dotfiles.
 
 ## How to install
 
@@ -9,7 +9,7 @@ Tools](https://developer.apple.com/downloads) and may overwrite existing
 dotfiles in your HOME.
 
 ```bash
-$ bash -c "$(curl -fsSL raw.github.com/SiTaggart/dotfiles/main/bin/dotfiles)"
+$ bash -c "$(curl -fsSL https://raw.githubusercontent.com/SiTaggart/dotfiles/main/bin/dotfiles)"
 ```
 
 N.B. If you wish to fork this project and maintain your own dotfiles, you must
@@ -54,38 +54,23 @@ Options:
 
 ## Features
 
+## Inspiration / modernization notes
+
+See `docs/inspiration.md` for a menu of common dotfiles patterns and settings you may want to adopt.
+
 ### Automatic software installation
 
 Homebrew formulae:
 
-- GNU core utilities
-- [git](http://git-scm.com/)
-- [ack](http://betterthangrep.com/)
-- bash (latest version)
-- [bash-completion](http://bash-completion.alioth.debian.org/)
-- [ffmpeg](http://ffmpeg.org/)
-- [graphicsmagick](http://www.graphicsmagick.org/)
-- [jpeg](https://en.wikipedia.org/wiki/Libjpeg)
-- [node](http://nodejs.org/)
-- nvm
-- [optipng](http://optipng.sourceforge.net/)
-- [phantomjs](http://phantomjs.org/)
-- [rsync](https://rsync.samba.org/) (latest version, rather than the out-dated OS X installation)
-- [tree](http://mama.indstate.edu/users/ice/tree/)
-- [wget](http://www.gnu.org/software/wget/)
-- Yarn
-- zsh
-- zsh-completion
+- Managed by `lib/brew` (formulae + casks), including: coreutils, git, bash, node, fnm, gh, mas, postgresql, zsh, ripgrep.
 
 Node packages:
 
-- [gify](https://github.com/visionmedia/node-gify)
-- [jshint](http://www.jshint.com/)
-- [yo](http://yeoman.io/)
+- Managed by `lib/npm` (global npm packages).
 
-### Custom OS X defaults
+### Custom macOS defaults
 
-Custom OS X settings can be applied during the `dotfiles` process. They can
+Custom macOS settings can be applied during the `dotfiles` process. They can
 also be applied independently by running the following command:
 
 ```bash
@@ -111,18 +96,9 @@ drive](http://nicolasgallagher.com/mac-osx-bootable-backup-drive-with-rsync/).
 
 Use Oceanic Next iTerm port, found here: [https://github.com/mhartington/oceanic-next-iterm](https://github.com/mhartington/oceanic-next-iterm)
 
-### ZSH and oh-my-zsh custom prompts
+### ZSH and oh-my-zsh custom prompt
 
-This can be run with ZSH shell, running an external theme called PowerLevel9k. Ensure you install oh-my-zsh and the theme
-to take advantage of the `.zshrc` settings.
-
-```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-```
-
-```bash
-git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-```
+The `.zshrc` is configured for oh-my-zsh with the Powerlevel10k theme.
 
 ### Local/private Bash
 

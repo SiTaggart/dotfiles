@@ -57,7 +57,7 @@
     # Use custom `.gitignore` and `.gitattributes`
     excludesfile = ~/.gitignore
     attributesfile = ~/.gitattributes
-    editor = code --wait
+    editor = code-insiders --wait
 
 [credential]
     helper = osxkeychain

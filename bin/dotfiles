@@ -1,22 +1,29 @@
 #!/bin/bash
 
+set -euo pipefail
+
 DOTFILES_DIRECTORY="${HOME}/.dotfiles"
 DOTFILES_TARBALL_PATH="https://github.com/SiTaggart/dotfiles/tarball/main"
-DOTFILES_GIT_REMOTE="git@github.com:SiTaggart/dotfiles.git"
+# Use HTTPS by default so sync works before SSH keys exist.
+DOTFILES_GIT_REMOTE="https://github.com/SiTaggart/dotfiles.git"
+DOTFILES_TARBALL_FILE="${HOME}/dotfiles.tar.gz"
+
+no_packages=false
+no_sync=false
 
 # If missing, download and extract the dotfiles repository
-if [[ ! -d ${DOTFILES_DIRECTORY} ]]; then
-    printf "$(tput setaf 7)Downloading dotfiles...\033[m\n"
-    mkdir ${DOTFILES_DIRECTORY}
+if [[ ! -d "${DOTFILES_DIRECTORY}" ]]; then
+    printf "%sDownloading dotfiles...\033[m\n" "$(tput setaf 7)"
+    mkdir -p "${DOTFILES_DIRECTORY}"
     # Get the tarball
-    curl -fsSLo ${HOME}/dotfiles.tar.gz ${DOTFILES_TARBALL_PATH}
+    curl -fsSLo "${DOTFILES_TARBALL_FILE}" "${DOTFILES_TARBALL_PATH}"
     # Extract to the dotfiles directory
-    tar -zxf ${HOME}/dotfiles.tar.gz --strip-components 1 -C ${DOTFILES_DIRECTORY}
+    tar -zxf "${DOTFILES_TARBALL_FILE}" --strip-components 1 -C "${DOTFILES_DIRECTORY}"
     # Remove the tarball
-    rm -rf ${HOME}/dotfiles.tar.gz
+    rm -f "${DOTFILES_TARBALL_FILE}"
 fi
 
-cd ${DOTFILES_DIRECTORY}
+cd "${DOTFILES_DIRECTORY}"
 
 source ./lib/help
 source ./lib/list
@@ -46,7 +53,7 @@ if [[ "$1" == "-l" || "$1" == "--list" ]]; then
 fi
 
 # Test for known flags
-for opt in $@
+for opt in "$@"
 do
     case $opt in
         --no-packages) no_packages=true ;;
@@ -92,7 +99,7 @@ fi
 if ! is_git_repo; then
     e_header "Initializing git repository..."
     git init && git symbolic-ref HEAD refs/heads/main
-    git remote add origin ${DOTFILES_GIT_REMOTE}
+    git remote add origin "${DOTFILES_GIT_REMOTE}"
     git fetch origin main
     # Reset the index and working tree to the fetched HEAD
     # (submodules are cloned in the subsequent sync step)
@@ -102,7 +109,7 @@ if ! is_git_repo; then
 fi
 
 # Conditionally sync with the remote repository
-if [[ $no_sync ]]; then
+if $no_sync; then
     printf "Skipped dotfiles sync.\n"
 else
     e_header "Syncing dotfiles..."
@@ -121,7 +128,7 @@ if is_confirmed; then
 fi
 
 # Install and update packages
-if [[ $no_packages ]]; then
+if $no_packages; then
     printf "Skipped package installations.\n"
 else
     printf "Updating packages...\n"
@@ -144,7 +151,7 @@ mirrorfiles() {
     # Copy `.gitconfig`.
     # Any global git commands in `~/.bash_profile.local` will be written to
     # `.gitconfig`. This prevents them being committed to the repository.
-    rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/gitconfig  ${HOME}/.gitconfig
+    rsync -a --quiet "${DOTFILES_DIRECTORY}/git/gitconfig" "${HOME}/.gitconfig"
 
     # Create the necessary symbolic links between the `.dotfiles` and `HOME`
     # directory. The `bash_profile` sources other files directly from the
@@ -165,18 +172,18 @@ seek_confirmation "Warning: This step may overwrite your existing dotfiles."
 
 if is_confirmed; then
     mirrorfiles
-    source ${HOME}/.bash_profile
+    source "${HOME}/.bash_profile"
 else
     printf "Aborting...\n"
     exit 1
 fi
 
-# Ask before potentially overwriting OS X defaults
-seek_confirmation "Warning: This step may modify your OS X system defaults."
+# Ask before potentially overwriting macOS defaults
+seek_confirmation "Warning: This step may modify your macOS system defaults."
 
 if is_confirmed; then
     bash ./bin/osxdefaults
-    e_success "OS X settings updated! You may need to restart."
+    e_success "macOS settings updated! You may need to restart."
 else
-    printf "Skipped OS X settings update.\n"
+    printf "Skipped macOS settings update.\n"
 fi

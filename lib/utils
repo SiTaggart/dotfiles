@@ -5,6 +5,11 @@ e_header() {
     printf "\n$(tput setaf 7)%s$(tput sgr0)\n" "$@"
 }
 
+# Step logging (alias for header)
+step() {
+    e_header "$@"
+}
+
 # Success logging
 e_success() {
     printf "$(tput setaf 64)✓ %s$(tput sgr0)\n" "$@"
@@ -24,7 +29,7 @@ e_warning() {
 seek_confirmation() {
     printf "\n"
     e_warning "$@"
-    read -p "Continue? (y/n) " -n 1
+    read -r -p "Continue? (y/n) " -n 1
     printf "\n"
 }
 
@@ -38,35 +43,33 @@ is_confirmed() {
 
 # Test whether we're in a git repo
 is_git_repo() {
-    $(git rev-parse --is-inside-work-tree &> /dev/null)
+    git rev-parse --is-inside-work-tree >/dev/null 2>&1
 }
 
 # Test whether a command exists
 # $1 - cmd to test
 type_exists() {
-    if [ $(type -P $1) ]; then
-      return 0
-    fi
-    return 1
+    command -v "$1" >/dev/null 2>&1
 }
 
 # Test whether a Homebrew formula is already installed
 # $1 - formula name (may include options)
 formula_exists() {
-    if $(brew list $1 >/dev/null); then
-        printf "%s already installed.\n" "$1"
+    local formula_name="${1%% *}"
+
+    if brew list --formula "$formula_name" >/dev/null 2>&1; then
+        printf "%s already installed.\n" "$formula_name"
         return 0
     fi
 
-    e_warning "Missing formula: $1"
+    e_warning "Missing formula: $formula_name"
     return 1
 }
 
 # Test whether a Homebrew cask is already installed
 # $1 - cask name
 cask_exists() {
-    # Use grep -q for quiet mode, ^ and $ for exact match
-    if brew list --cask | grep -q "^$1\$"; then
+    if brew list --cask "$1" >/dev/null 2>&1; then
         printf "%s already installed.\n" "$1"
         return 0
     fi

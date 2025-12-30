@@ -7,20 +7,20 @@ run_brew() {
         e_header "Updating Homebrew..."
         # Use the latest version of Homebrew
         brew update
-        [[ $? ]] && e_success "Done"
+        if [[ $? -eq 0 ]]; then e_success "Done"; fi
 
         e_header "Updating any existing Homebrew formulae..."
         # Upgrade any already-installed formulae
         brew upgrade
-        [[ $? ]] && e_success "Done"
+        if [[ $? -eq 0 ]]; then e_success "Done"; fi
 
         e_header "Checking status of desired Homebrew formulae..."
-        local list_formulae
-        local -a missing_formulae
+        local -a missing_formulae=()
         local -a desired_formulae=(
-            'coreutils' # GNU core utilities (those that come with OS X are outdated)
+            'coreutils' # GNU core utilities (those that come with macOS are outdated)
             'git'
             'ack'
+            'ripgrep'
             'bash'
             'bash-completion'
             'ffmpeg'
@@ -39,6 +39,7 @@ run_brew() {
             'postgresql'
             'grep'
             '1password-cli'
+            'rsync'
         )
 
         for index in ${!desired_formulae[*]}
@@ -49,25 +50,15 @@ run_brew() {
             fi
         done
 
-        if [[ "$missing_formulae" ]]; then
-            # Convert the array of missing formula into a list of space-separate strings
-            list_formulae=$( printf "%s " "${missing_formulae[@]}" )
-
-            e_header "Installing missing Homebrew formulae..."
-            # Install all missing formulae
-            brew install $list_formulae
-
-            [[ $? ]] && e_success "Done"
+        if (( ${#missing_formulae[@]} )); then
+            e_header "Installing missing Homebrew formulae: ${missing_formulae[*]}"
+            brew install "${missing_formulae[@]}"
+            if [[ $? -eq 0 ]]; then e_success "Done"; fi
         fi
-
-        # use latest rsync rather than out-dated OS X rsync
-        # install separately from the main formulae list to fix gh-19
-        brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/master/Formula/rsync.rb
 
         # Install Homebrew casks
         e_header "Checking status of desired Homebrew casks..."
-        local list_casks
-        local -a missing_casks
+        local -a missing_casks=()
         local -a desired_casks=(
             '1password'
             'ghostty'
@@ -108,10 +99,9 @@ run_brew() {
         done
 
         if [[ ${#missing_casks[@]} -ne 0 ]]; then
-            list_casks=$( printf "%s " "${missing_casks[@]}" )
-            e_header "Installing missing Homebrew casks: $list_casks"
-            brew install --cask $list_casks
-            [[ $? ]] && e_success "Done"
+            e_header "Installing missing Homebrew casks: ${missing_casks[*]}"
+            brew install --cask "${missing_casks[@]}"
+            if [[ $? -eq 0 ]]; then e_success "Done"; fi
         else
             e_success "All desired casks already installed."
         fi

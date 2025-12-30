@@ -1,8 +1,7 @@
 #!/bin/bash
-# Amazon Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/bash_profile.pre.bash" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/bash_profile.pre.bash"
-
 # bash_profile
+# Kiro CLI pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/bash_profile.pre.bash" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/bash_profile.pre.bash"
 
 # set 256 color profile where possible
 if [[ $COLORTERM == gnome-* && $TERM == xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
@@ -15,18 +14,21 @@ fi
 # Not part of `load_dotfiles` because it must be sourced before anything else
 # to be sure that commands like `brew` (when installed in a custom location)
 # are already added to the PATH.
-[ -r $HOME/.dotfilesrc ] && source $HOME/.dotfilesrc;
+[[ -r "$HOME/.dotfilesrc" ]] && source "$HOME/.dotfilesrc"
 
 load_dotfiles() {
-    declare -a files=(
-        $HOME/.dotfiles/shell/bash_options # Options
-        $HOME/.dotfiles/shell/bash_exports # Exports
-        $HOME/.dotfiles/shell/bash_aliases # Aliases
-        $HOME/.dotfiles/shell/functions/* # Functions
-        $HOME/.dotfiles/shell/bash_paths # Path modifications
-        $(brew --prefix)/etc/bash_completion # Bash completion (installed via Homebrew)
-        $HOME/.bash_profile.local # Local and private settings not under version control (e.g. git credentials)
-    )
+    declare -a files=()
+
+    files+=("$HOME/.dotfiles/shell/bash_options") # Options
+    files+=("$HOME/.dotfiles/shell/bash_exports") # Exports
+    files+=("$HOME/.dotfiles/shell/bash_aliases") # Aliases
+    files+=("$HOME/.dotfiles/shell/functions/"*) # Functions
+    files+=("$HOME/.dotfiles/shell/bash_paths") # Path modifications
+    files+=("$HOME/.bash_profile.local") # Local and private settings not under version control (e.g. git credentials)
+
+    if command -v brew >/dev/null 2>&1; then
+        files+=("$(brew --prefix)/etc/bash_completion") # Bash completion (installed via Homebrew)
+    fi
 
     # if these files are readable, source them
     for index in ${!files[*]}
@@ -40,5 +42,5 @@ load_dotfiles() {
 load_dotfiles
 unset load_dotfiles
 
-# Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/bash_profile.post.bash" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/bash_profile.post.bash"
+# Kiro CLI post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/bash_profile.post.bash" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/bash_profile.post.bash"

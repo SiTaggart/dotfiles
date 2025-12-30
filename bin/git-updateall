@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Runs `git pull` on every directory within the current directory
+# Runs `git pull` on every git repo in subdirectories of the current directory.
 
-# `find .` search the current directory
-# `-type d` find only directories, not files
-# `-print` print the directory name
-# `-maxdepth 1` limit the depth to one sub-directory
-# `-execdir {} \;` run a custom command for every directory found
-# `git --git-dir={}/.git --work-tree=$PWD/{} pull` git-pull each directory
+set -euo pipefail
 
-find . -type d -print -maxdepth 1 -execdir git --git-dir={}/.git --work-tree=$PWD/{} pull \;
+for git_dir in ./*/.git; do
+    [[ -d "${git_dir}" ]] || continue
+    repo_dir="${git_dir%/.git}"
+    printf "\n==> %s\n" "${repo_dir#./}"
+    (cd "${repo_dir}" && git pull --ff-only)
+done

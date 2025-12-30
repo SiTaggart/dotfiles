@@ -4,6 +4,8 @@
 
 # Directories to be prepended to PATH
 declare -a dirs_to_prepend=(
+    "/opt/homebrew/bin"
+    "/opt/homebrew/sbin"
     "/usr/local/bin" # Ensure that this bin always takes precedence over `/usr/bin`
 )
 
@@ -13,16 +15,21 @@ declare -a dirs_to_append=(
     "$HOME/sbin"
     "$HOME/bin"
     "$HOME/.dotfiles/bin"
-    "$(brew --prefix coreutils)/libexec/gnubin" # Add brew-installed GNU core utilities bin
-    "$(brew --prefix)/share/npm/bin" # Add npm-installed package bin
-    "$(brew --prefix nvm)/nvm.sh" # Add nvm
     "$HOME/heroku/bin"
 )
+
+# Homebrew-dependent paths (only when Homebrew exists)
+if command -v brew >/dev/null 2>&1; then
+    coreutils_prefix="$(brew --prefix coreutils 2>/dev/null || true)"
+    if [[ -n "${coreutils_prefix}" ]]; then
+        dirs_to_append+=("${coreutils_prefix}/libexec/gnubin") # GNU core utilities
+    fi
+fi
 
 # Prepend directories to PATH
 for index in ${!dirs_to_prepend[*]}
 do
-    if [ -d ${dirs_to_prepend[$index]} ]; then
+    if [[ -d "${dirs_to_prepend[$index]}" ]]; then
         # If these directories exist, then prepend them to existing PATH
         PATH="${dirs_to_prepend[$index]}:$PATH"
     fi
@@ -31,7 +38,7 @@ done
 # Append directories to PATH
 for index in ${!dirs_to_append[*]}
 do
-    if [ -d ${dirs_to_append[$index]} ]; then
+    if [[ -d "${dirs_to_append[$index]}" ]]; then
         # If these bins exist, then append them to existing PATH
         PATH="$PATH:${dirs_to_append[$index]}"
     fi
