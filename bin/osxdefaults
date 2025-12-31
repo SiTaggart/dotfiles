@@ -162,21 +162,6 @@ write_default com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 # write_default com.apple.frameworks.diskimages skip-verify-locked -bool true
 # write_default com.apple.frameworks.diskimages skip-verify-remote -bool true
 
-# Safari
-# ----------------------------------------------------------------------
-
-# Press Tab to highlight each item on a web page
-write_default com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
-write_default com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
-
-# Show the full URL in the address bar (note: this still hides the scheme)
-write_default com.apple.Safari ShowFullURLInSmartSearchField -bool true
-
-# Enable the Develop menu and the Web Inspector in Safari
-write_default com.apple.Safari IncludeDevelopMenu -bool true
-write_default com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-write_default com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
-
 # iTerm2
 # ----------------------------------------------------------------------
 
@@ -215,6 +200,6 @@ write_default NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 write_default NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 write_default NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
-for app in "Dock" "Finder" "Photos" "Safari" "SystemUIServer" "Terminal"; do
+for app in "Dock" "Finder" "Photos" "SystemUIServer" "Terminal"; do
     killall "$app" >/dev/null 2>&1 || true
 done

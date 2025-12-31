@@ -1,18 +1,27 @@
 #!/bin/bash
 
 run_fonts() {
+    e_header "Checking status of desired fonts..."
+    
+    local -a missing_fonts=()
+    local -a desired_fonts=(
+        'font-jetbrains-mono'
+        'font-jetbrains-mono-nerd-font'
+        'font-fira-mono-for-powerline'
+        'font-fira-code'
+    )
 
-#############################################
-### Fonts
-#############################################
+    for font_name in "${desired_fonts[@]}"; do
+        if ! cask_exists "$font_name"; then
+            missing_fonts+=("$font_name")
+        fi
+    done
 
-echo "Installing fonts..."
-
-brew tap homebrew/cask-fonts
-
-### programming fonts
-brew install --cask font-jetbrains-mono
-brew install --cask font-jetbrains-mono-nerd-font
-brew install --cask font-fira-mono-for-powerline
-brew install --cask font-fira-code
+    if [[ ${#missing_fonts[@]} -ne 0 ]]; then
+        e_header "Installing missing fonts: ${missing_fonts[*]}"
+        brew install --cask "${missing_fonts[@]}"
+        if [[ $? -eq 0 ]]; then e_success "Done"; fi
+    else
+        e_success "All desired fonts already installed."
+    fi
 }

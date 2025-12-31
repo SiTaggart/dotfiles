@@ -1,6 +1,8 @@
 #!/bin/bash
 
-set -euo pipefail
+# This is a nice idea to fail fast on errors, but it can be annoying during
+# development when you want to test things that may fail.
+# set -euo pipefail
 
 DOTFILES_DIRECTORY="${HOME}/.dotfiles"
 DOTFILES_TARBALL_PATH="https://github.com/SiTaggart/dotfiles/tarball/main"

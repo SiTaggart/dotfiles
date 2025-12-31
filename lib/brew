@@ -93,7 +93,7 @@ run_brew() {
 
         for cask_name in ${desired_casks[*]}
         do
-            if ! cask_exists $cask_name; then
+            if ! app_or_cask_exists "$cask_name"; then
                 missing_casks+=("$cask_name")
             fi
         done

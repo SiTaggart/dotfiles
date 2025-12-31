@@ -77,3 +77,38 @@ cask_exists() {
     e_warning "Missing cask: $1"
     return 1
 }
+
+# Test whether a cask is installed via Homebrew OR the app exists in /Applications
+# $1 - cask name
+app_or_cask_exists() {
+    # Already installed via brew?
+    if brew list --cask "$1" >/dev/null 2>&1; then
+        printf "%s already installed (via Homebrew).\n" "$1"
+        return 0
+    fi
+
+    # Get the app name from brew's cask metadata (artifacts[].app[] contains "AppName.app")
+    # JSON is pretty-printed, so collapse newlines first
+    local app_file
+    app_file=$(brew info --cask "$1" --json=v2 2>/dev/null | tr -d '\n' | grep -o '"app": \[[^]]*\]' | grep -o '"[^"]*\.app"' | head -1 | tr -d '"')
+
+    # Check /Applications and ~/Applications
+    if [[ -n "$app_file" ]]; then
+        if [[ -d "/Applications/${app_file}" || -d "$HOME/Applications/${app_file}" ]]; then
+            printf "%s already installed (found %s).\n" "$1" "$app_file"
+            return 0
+        fi
+    fi
+
+    # Fallback for PKG-based casks: use mdfind (Spotlight) to search by cask name
+    # This catches apps like zoom (zoom.us.app) that don't have an app artifact
+    local found_app
+    found_app=$(mdfind "kMDItemKind == 'Application' && kMDItemFSName == '*${1}*'c" 2>/dev/null | head -1)
+    if [[ -n "$found_app" ]]; then
+        printf "%s already installed (found %s).\n" "$1" "$(basename "$found_app")"
+        return 0
+    fi
+
+    e_warning "Missing cask: $1"
+    return 1
+}
