@@ -41,13 +41,13 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Help text
-if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
     run_help
     exit
 fi
 
 # List additional software to install
-if [[ "$1" == "-l" || "$1" == "--list" ]]; then
+if [[ "${1:-}" == "-l" || "${1:-}" == "--list" ]]; then
     run_list
     exit
 fi
@@ -65,7 +65,7 @@ done
 # -----------------------------------------------------------------------------
 # XCode
 # -----------------------------------------------------------------------------
-if type xcode-select >&- && xpath=$( xcode-select --print-path ) &&
+if type xcode-select >/dev/null 2>&1 && xpath=$( xcode-select --print-path ) &&
 	test -d "${xpath}" && test -x "${xpath}" ; then
 	e_header "Xcode already installed. Skipping."
 else
