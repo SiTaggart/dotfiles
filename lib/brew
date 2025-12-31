@@ -40,6 +40,7 @@ run_brew() {
             'grep'
             '1password-cli'
             'rsync'
+            'bun'
         )
 
         for index in ${!desired_formulae[*]}
@@ -62,23 +63,20 @@ run_brew() {
         local -a desired_casks=(
             '1password'
             'ghostty'
+            'warp'
             'docker'
             'visual-studio-code'
             'visual-studio-code@insiders'
             'notion'
-            'obsidian'
             'imageoptim' # Changed from ImageOptim for consistency
             'raycast'
             'dropbox'
             'keycastr'
-            'caffeine'
             'slack'
             'zoom'
             'hot'
             'pika'
-            'loom'
             'rescuetime'
-            'kap'
             'bruno'
             'rocket'
             'firefox'
@@ -89,6 +87,9 @@ run_brew() {
             'claude'
             'cursor'
             'figma'
+            'cleanshot'
+            'superwhisper'
+            'rectangle'
         )
 
         for cask_name in ${desired_casks[*]}

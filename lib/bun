@@ -1,0 +1,23 @@
+#!/bin/bash
+
+run_bun() {
+
+    # Check for bun
+    if type_exists 'bun'; then
+        e_header "Installing global packages with bun..."
+
+        # List of packages to install globally
+        local packages="gify eslint babel-cli babel-eslint git-standup fkill-cli serve @anthropic-ai/claude-code @openai/codex opencode-ai"
+
+        # Install packages globally
+        bun install $packages --global
+
+        [[ $? ]] && e_success "Done"
+    else
+        printf "\n"
+        e_error "Error: bun not found."
+        printf "Aborting...\n"
+        exit
+    fi
+
+}

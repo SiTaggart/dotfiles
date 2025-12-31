@@ -23,7 +23,7 @@ You should run the update when:
 - You make a change to `~/.dotfiles/git/gitconfig` (the only file that is
   copied rather than symlinked).
 - You want to pull changes from the remote repository.
-- You want to update Homebrew formulae and Node packages.
+- You want to update Homebrew formulae and global packages.
 
 Run the dotfiles command:
 
@@ -64,9 +64,9 @@ Homebrew formulae:
 
 - Managed by `lib/brew` (formulae + casks), including: coreutils, git, bash, node, fnm, gh, mas, postgresql, zsh, ripgrep.
 
-Node packages:
+Global packages:
 
-- Managed by `lib/npm` (global npm packages).
+- Managed by `lib/bun` (global packages installed with bun).
 
 ### Custom macOS defaults
 
