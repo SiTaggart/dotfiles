@@ -10,8 +10,8 @@ run_brew() {
         if [[ $? -eq 0 ]]; then e_success "Done"; fi
 
         e_header "Updating any existing Homebrew formulae..."
-        # Upgrade any already-installed formulae
-        brew upgrade
+        # Upgrade any already-installed formulae (skip casks - GUI apps auto-update)
+        brew upgrade --formula
         if [[ $? -eq 0 ]]; then e_success "Done"; fi
 
         e_header "Checking status of desired Homebrew formulae..."

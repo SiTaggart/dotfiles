@@ -7,7 +7,7 @@ run_bun() {
         e_header "Installing global packages with bun..."
 
         # List of packages to install globally
-        local packages="gify eslint babel-cli babel-eslint git-standup fkill-cli serve @anthropic-ai/claude-code @openai/codex opencode-ai"
+        local packages="gify pnpm eslint babel-cli babel-eslint git-standup fkill-cli serve @anthropic-ai/claude-code @openai/codex opencode-ai"
 
         # Install packages globally
         bun install $packages --global
