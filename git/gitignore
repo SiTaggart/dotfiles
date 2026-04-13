@@ -13,15 +13,30 @@ Icon?
 *~
 *.swp
 
+.worktreeinclude
+
 # Ignore Cursor personal rules
 **/.cursor/rules/_personal/
 **/.github/instructions/_personal/
 **/.github/prompts/
 **/.claude/settings.local.json
-**/.claude/hooks.mjs
-**/.opencode/
+**/.claude/hooks
+**/.claude/worktrees/
+**/.opencode
+**/.vscode/*.code-workspace
 opencode.jsonc
 opencode.json
-**/.ai/
+**/.ai
 .playwright-mcp/
 .repoprompt/
+**/.conductor
+conductor.json
+**/compound-engineering.local.md
+
+
+.scratch
+.buffers
+.data
+.notes
+.superset/
+.ports
