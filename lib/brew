@@ -40,7 +40,6 @@ run_brew() {
             'grep'
             '1password-cli'
             'rsync'
-            'bun'
         )
 
         for index in ${!desired_formulae[*]}
@@ -77,7 +76,6 @@ run_brew() {
             'pika'
             'rescuetime'
             'bruno'
-            'rocket'
             'firefox'
             'google-chrome'
             'microsoft-edge'
@@ -89,6 +87,11 @@ run_brew() {
             'cleanshot'
             'superwhisper'
             'rectangle'
+            'pluk'
+            'obsidian'
+            'codex'
+            'linear'
+            'granola'
         )
 
         for cask_name in ${desired_casks[*]}
