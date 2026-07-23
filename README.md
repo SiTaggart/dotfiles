@@ -96,9 +96,18 @@ drive](http://nicolasgallagher.com/mac-osx-bootable-backup-drive-with-rsync/).
 
 Use Oceanic Next iTerm port, found here: [https://github.com/mhartington/oceanic-next-iterm](https://github.com/mhartington/oceanic-next-iterm)
 
-### ZSH and oh-my-zsh custom prompt
+### ZSH and Oh My Posh
 
-The `.zshrc` is configured for oh-my-zsh with the Powerlevel10k theme.
+Oh My Zsh continues to provide plugins and shell behavior, while Oh My Posh
+owns the prompt. Homebrew installs the binary, and `zsh/oh-my-posh.omp.json`
+is the tracked local theme used by `zsh/zshrc`; shell startup does not download
+a theme. Terminals should use one of the Nerd Fonts provisioned by `lib/fonts`.
+
+During the migration soak, the previously installed Powerlevel10k clone is
+left in place as a first-update fallback when Oh My Posh is not yet available.
+To roll back, remove the Oh My Posh initializer and restore the Powerlevel10k-
+owned lines in `zsh/zshrc`. Do not restore the complete file because it may
+contain unrelated local settings.
 
 ### Local/private Bash
 

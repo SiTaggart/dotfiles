@@ -40,6 +40,7 @@ run_brew() {
             'grep'
             '1password-cli'
             'rsync'
+            'jandedobbeleer/oh-my-posh/oh-my-posh'
         )
 
         for index in ${!desired_formulae[*]}

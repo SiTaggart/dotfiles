@@ -144,6 +144,15 @@ else
     run_fonts
 fi
 
+if ! type_exists 'oh-my-posh'; then
+    if $no_packages; then
+        e_warning "Oh My Posh is not installed; keeping the existing prompt."
+    else
+        e_error "Oh My Posh was not installed."
+        exit 1
+    fi
+fi
+
 link() {
     # Force create/replace the symlink.
     ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
