@@ -88,7 +88,6 @@ run_brew() {
             'cleanshot'
             'superwhisper'
             'rectangle'
-            'pluk'
             'obsidian'
             'codex'
             'linear'

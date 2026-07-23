@@ -139,9 +139,6 @@ esac
 export PATH="$HOME/Library/Application Support/fnm:$PATH"
 eval "`fnm env --use-on-cd --version-file-strategy recursive --shell zsh`"
 
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)" # Added by Antigravity
-export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
-
 # Kiro CLI post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
 

@@ -30,13 +30,22 @@ opencode.json
 .playwright-mcp/
 .repoprompt/
 **/.conductor
+**/.zed
 conductor.json
 **/compound-engineering.local.md
 
-
+**/.agents
 .scratch
 .buffers
 .data
 .notes
 .superset/
 .ports
+.codex/environments
+
+# Generated dependency/data folders that can make agent background Git scans expensive
+.venv/
+venv/
+site-packages/
+vector_data/
+chroma*/
