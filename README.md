@@ -103,6 +103,11 @@ owns the prompt. Homebrew installs the binary, and `zsh/oh-my-posh.omp.json`
 is the tracked local theme used by `zsh/zshrc`; shell startup does not download
 a theme. Terminals should use one of the Nerd Fonts provisioned by `lib/fonts`.
 
+Claude Code renders its status line with the same palette. Its settings point
+`statusLine` at `bin/claude-statusline`, which forwards the session payload to
+the Orca agent hook when present and then renders `zsh/claude.omp.json` with
+`oh-my-posh claude`.
+
 During the migration soak, the previously installed Powerlevel10k clone is
 left in place as a first-update fallback when Oh My Posh is not yet available.
 To roll back, remove the Oh My Posh initializer and restore the Powerlevel10k-
