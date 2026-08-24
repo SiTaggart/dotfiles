@@ -1,0 +1,15 @@
+#!/bin/sh
+# Claude Code status line.
+# Renders the status line with Oh My Posh and forwards the payload to the
+# Orca agent hook when it is installed, so Orca keeps its rate-limit data.
+
+PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+
+payload=$(cat)
+
+orca_hook="$HOME/.orca/agent-hooks/claude-statusline.sh"
+if [ -x "$orca_hook" ]; then
+  printf '%s' "$payload" | /bin/sh "$orca_hook" >/dev/null 2>&1 || :
+fi
+
+printf '%s' "$payload" | oh-my-posh claude --config "$HOME/.dotfiles/zsh/claude.omp.json"

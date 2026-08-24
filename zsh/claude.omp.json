@@ -1,0 +1,78 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "palette": {
+    "ink": "#11111B",
+    "surface": "#313244",
+    "subtext": "#CDD6F4",
+    "lavender": "#B4BEFE",
+    "blue": "#89B4FA",
+    "mauve": "#CBA6F7",
+    "pink": "#F5C2E7",
+    "peach": "#FAB387",
+    "green": "#A6E3A1",
+    "red": "#F38BA8"
+  },
+  "blocks": [
+    {
+      "alignment": "left",
+      "type": "prompt",
+      "segments": [
+        {
+          "type": "path",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "background": "p:blue",
+          "foreground": "p:ink",
+          "options": {
+            "style": "folder"
+          },
+          "template": " \uf07c {{ .Path }} "
+        },
+        {
+          "type": "git",
+          "style": "diamond",
+          "background": "p:mauve",
+          "foreground": "p:ink",
+          "options": {
+            "fetch_status": true
+          },
+          "template": " {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }} \uf040{{ end }} "
+        },
+        {
+          "type": "claude",
+          "style": "diamond",
+          "background": "p:lavender",
+          "foreground": "p:ink",
+          "template": " \u273b {{ .Model.DisplayName }}{{ if .Effort }} \u00b7 {{ .Effort.Level }}{{ end }}{{ if .FastMode }} \u00b7 fast{{ end }} "
+        },
+        {
+          "type": "claude",
+          "style": "diamond",
+          "background": "p:green",
+          "background_templates": [
+            "{{ if ge .TokenUsagePercent 85 }}p:red{{ end }}",
+            "{{ if ge .TokenUsagePercent 60 }}p:peach{{ end }}"
+          ],
+          "foreground": "p:ink",
+          "template": " {{ .TokenGaugeUsed }} {{ .TokenUsagePercent }}% \u00b7 {{ .FormattedTokens }} "
+        },
+        {
+          "type": "claude",
+          "style": "diamond",
+          "background": "p:surface",
+          "foreground": "p:subtext",
+          "template": "{{ if .RateLimits }} 5h {{ .FiveHourUsage }}% \u00b7 7d {{ .SevenDayUsage }}% {{ end }}"
+        },
+        {
+          "type": "claude",
+          "style": "diamond",
+          "trailing_diamond": "\ue0b4",
+          "background": "p:pink",
+          "foreground": "p:ink",
+          "template": " {{ .FormattedCost }} \u00b7 \uf017 {{ .FormattedDuration }} "
+        }
+      ]
+    }
+  ]
+}
