@@ -26,7 +26,6 @@ Icon?
 **/.vscode/*.code-workspace
 opencode.jsonc
 opencode.json
-**/.ai
 .playwright-mcp/
 .repoprompt/
 **/.conductor
